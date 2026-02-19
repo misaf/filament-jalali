@@ -43,6 +43,26 @@ Components\TextEntry::make('updated_at')
     ->jalaliDateTime(),
 ```
 
+### Force Latin or Farsi Numbers
+By default, numbers follow the app locale. You can override this using the `latinNumbers` argument:
+
+```php
+use Filament\Tables;
+use Filament\Infolists\Components;
+
+Tables\Columns\TextColumn::make('created_at')
+    ->jalaliDate('Y-m-d', latinNumbers: true), // 1369-06-21
+
+Tables\Columns\TextColumn::make('updated_at')
+    ->jalaliDateTime('Y-m-d H:i:s', latinNumbers: false), // ۱۳۶۹-۰۶-۲۱ ۱۳:۱۴:۱۵
+
+Components\TextEntry::make('created_at')
+    ->jalaliDate('Y-m-d', latinNumbers: true),
+
+Components\TextEntry::make('updated_at')
+    ->jalaliDateTime('Y-m-d H:i:s', latinNumbers: false),
+```
+
 To add Jalali date and date-time pickers to your forms, just add `jalali`to your `DatePicker` and `DateTimePicker`.
 
 ```php
