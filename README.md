@@ -18,6 +18,22 @@ You can install the package via composer:
 composer require mokhosh/filament-jalali
 ```
 
+## PHPStan / Larastan
+
+This package ships a PHPStan extension file (`extension.neon`) and macro stubs for:
+- `Filament\Tables\Columns\TextColumn`
+- `Filament\Infolists\Components\TextEntry`
+- `Filament\Forms\Components\DateTimePicker`
+
+If you use `phpstan/extension-installer`, it is discovered automatically.
+
+If you do not use extension-installer, add this include to your `phpstan.neon`:
+
+```neon
+includes:
+    - vendor/mokhosh/filament-jalali/extension.neon
+```
+
 ## Usage
 
 To add Jalali date and date-time columns to your tables, just add `jalaliDate` and `jalaliDateTime` to the filament `TextColumn`s instead of `date` or `dateTime`.
