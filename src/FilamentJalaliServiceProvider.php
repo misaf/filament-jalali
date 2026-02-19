@@ -31,10 +31,10 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             AlpineComponent::make('filament-jalali', __DIR__.'/../resources/js/dist/components/filament-jalali.js'),
         ], 'mokhosh/filament-jalali');
 
-        TextColumn::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
+        TextColumn::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null) {
             $format ??= fn (TextColumn $column): string => $column->getTable()->getDefaultDateDisplayFormat();
 
-            $this->formatStateUsing(static function (TextColumn $column, $state) use ($format, $timezone): ?string {
+            $this->formatStateUsing(static function (TextColumn $column, $state) use ($format, $timezone, $latinNumbers): ?string {
                 if (blank($state)) {
                     return null;
                 }
@@ -46,25 +46,25 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     Jalalian::fromCarbon(
                         Carbon::parse($state)->setTimezone($timezone ?? $column->getTimezone())
                     )->format($format),
-                    ! App::isLocale('fa')
+                    $latinNumbers ?? ! App::isLocale('fa')
                 );
             });
 
             return $this;
         });
 
-        TextColumn::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
+        TextColumn::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null) {
             $format ??= fn (TextColumn $column): string => $column->getTable()->getDefaultDateTimeDisplayFormat();
 
-            $this->jalaliDate($format, $timezone);
+            $this->jalaliDate($format, $timezone, $latinNumbers);
 
             return $this;
         });
 
-        TextEntry::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null) {
+        TextEntry::macro('jalaliDate', function (string|Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null) {
             $format ??= fn (TextEntry $component): string => $component->getContainer()->getDefaultDateDisplayFormat();
 
-            $this->formatStateUsing(static function (TextEntry $component, $state) use ($format, $timezone): ?string {
+            $this->formatStateUsing(static function (TextEntry $component, $state) use ($format, $timezone, $latinNumbers): ?string {
                 if (blank($state)) {
                     return null;
                 }
@@ -76,17 +76,17 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     Jalalian::fromCarbon(
                         Carbon::parse($state)->setTimezone($component->evaluate($timezone) ?? $component->getTimezone())
                     )->format($format),
-                    ! App::isLocale('fa')
+                    $latinNumbers ?? ! App::isLocale('fa')
                 );
             });
 
             return $this;
         });
 
-        TextEntry::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null) {
+        TextEntry::macro('jalaliDateTime', function (string|Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null) {
             $format ??= fn (TextEntry $component): string => $component->getContainer()->getDefaultDateTimeDisplayFormat();
 
-            $this->jalaliDate($format, $timezone);
+            $this->jalaliDate($format, $timezone, $latinNumbers);
 
             return $this;
         });
