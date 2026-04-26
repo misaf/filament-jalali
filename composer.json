@@ -56,6 +56,11 @@
         }
     },
     "extra": {
+        "phpstan": {
+            "includes": [
+                "extension.neon"
+            ]
+        },
         "laravel": {
             "providers": [
                 "Mokhosh\\FilamentJalali\\FilamentJalaliServiceProvider"
