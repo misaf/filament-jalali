@@ -12,15 +12,15 @@ class DateTimePicker {}
 namespace Filament\Infolists\Components;
 
 /**
- * @method $this jalaliDate(string|\Closure|null $format = null, ?string $timezone = null)
- * @method $this jalaliDateTime(string|\Closure|null $format = null, ?string $timezone = null)
+ * @method $this jalaliDate(string|\Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null)
+ * @method $this jalaliDateTime(string|\Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null)
  */
 class TextEntry {}
 
 namespace Filament\Tables\Columns;
 
 /**
- * @method $this jalaliDate(string|\Closure|null $format = null, ?string $timezone = null)
- * @method $this jalaliDateTime(string|\Closure|null $format = null, ?string $timezone = null)
+ * @method $this jalaliDate(string|\Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null)
+ * @method $this jalaliDateTime(string|\Closure|null $format = null, ?string $timezone = null, ?bool $latinNumbers = null)
  */
 class TextColumn {}
